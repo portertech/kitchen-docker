@@ -482,6 +482,16 @@ Examples:
     net: br3
 ```
 
+### build_tempdir
+
+Relative (to `build_context`) temporary directory path for builded Dockerfile.
+
+Example:
+
+```yaml
+  build_tempdir: .kitchen
+```
+
 ### use_internal_docker_network
 
 If you want to use kitchen-docker from within another Docker container you'll
