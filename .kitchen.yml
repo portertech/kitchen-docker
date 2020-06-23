@@ -27,9 +27,9 @@ platforms:
 - name: oraclelinux-7
 - name: debian-8
 - name: debian-9
-- name: opensuse-42.3
-  driver:
-    image: opensuse/leap:42.3
+#- name: opensuse-42.3
+#  driver:
+#    image: opensuse/leap:42.3
 - name: opensuse/leap-42
 # - name: arch
 #   driver:

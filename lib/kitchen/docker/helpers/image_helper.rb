@@ -25,12 +25,17 @@ module Kitchen
         include Kitchen::Docker::Helpers::ContainerHelper
 
         def parse_image_id(output)
+          image_id = nil
           output.each_line do |line|
             if line =~ /image id|build successful|successfully built/i
-              return line.split(/\s+/).last
+              image_id = line.split(/\s+/).last
             end
           end
-          raise ActionFailed, 'Could not parse Docker build output for image ID'
+          if image_id.nil?
+            raise ActionFailed, 'Could not parse Docker build output for image ID'
+          else
+            return image_id
+          end
         end
 
         def remove_image(state)
