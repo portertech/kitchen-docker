@@ -35,7 +35,12 @@ module Kitchen
 
         def remove_image(state)
           image_id = state[:image_id]
-          docker_command("rmi #{image_id}")
+          if image_in_use?(state)
+            info("[Docker] Image ID #{image_id} is in use. Skipping removal")
+          else
+            info("[Docker] Removing image with Image ID #{image_id}.")
+            docker_command("rmi #{image_id}")
+          end
         end
 
         def build_image(state, dockerfile)
@@ -62,6 +67,10 @@ module Kitchen
 
         def image_exists?(state)
           state[:image_id] && !!docker_command("inspect --type=image #{state[:image_id]}") rescue false
+        end
+
+        def image_in_use?(state)
+          docker_command('ps -a', suppress_output: !logger.debug?).include?(state[:image_id])
         end
       end
     end
