@@ -26,7 +26,7 @@ module Kitchen
 
         def parse_image_id(output)
           output.each_line do |line|
-            if line =~ /image id|build successful|successfully built/i
+            if line =~ /image id|build successful|successfully built|sha256:/i
               return line.split(/\s+/).last
             end
           end
