@@ -62,8 +62,7 @@ module Kitchen
           packages = <<-CODE
             ENV DEBIAN_FRONTEND noninteractive
             ENV container docker
-            RUN apt-get update
-            RUN apt-get install -y sudo openssh-server curl lsb-release
+            RUN apt-get update && apt-get install -y sudo openssh-server curl lsb-release
           CODE
           config[:disable_upstart] ? disable_upstart + packages : packages
         end
